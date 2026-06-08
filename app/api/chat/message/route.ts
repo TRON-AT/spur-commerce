@@ -10,7 +10,7 @@ const MAX_REQUESTS_PER_WINDOW = 10 // max 10 messages per minute per IP
 export async function POST(req: Request) {
   try {
     // 1. IP-based Rate Limiting
-    const ip = req.headers.get('x-forwarded-for') || 'unknown-ip'
+    const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown-ip'
     const now = Date.now()
     const rateLimitInfo = rateLimitMap.get(ip)
 
@@ -113,7 +113,7 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error('Chat API Error:', error)
     return NextResponse.json(
-      { error: error?.message || 'Failed to process message', stack: error?.stack },
+      { error: 'Failed to process message. Please try again later.' },
       { status: 500 }
     )
   }
