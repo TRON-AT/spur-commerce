@@ -73,8 +73,8 @@ export function useChat() {
           throw new Error(data.error || 'Failed to send message')
         }
 
-        // Save session ID if we just created a new one
-        if (data.sessionId && !sessionId) {
+        // Save session ID if we just created a new one or the backend regenerated it
+        if (data.sessionId && data.sessionId !== sessionId) {
           setSessionId(data.sessionId)
           localStorage.setItem('spur_chat_session', data.sessionId)
         }

@@ -49,7 +49,16 @@ export async function POST(req: Request) {
     }
     let conversationId = sessionId
 
-    // 1. If no sessionId, create a new conversation
+    // 1. Check if conversation exists, or create a new one
+    if (conversationId) {
+      const existingConversation = await prisma.conversation.findUnique({
+        where: { id: conversationId }
+      })
+      if (!existingConversation) {
+        conversationId = null // Invalid session ID, so we'll create a new one
+      }
+    }
+
     if (!conversationId) {
       const newConversation = await prisma.conversation.create({
         data: {},
@@ -101,10 +110,10 @@ export async function POST(req: Request) {
       reply,
       sessionId: conversationId,
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Chat API Error:', error)
     return NextResponse.json(
-      { error: 'Failed to process message' },
+      { error: error?.message || 'Failed to process message', stack: error?.stack },
       { status: 500 }
     )
   }
