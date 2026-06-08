@@ -2,8 +2,35 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { generateReply } from '@/lib/ai/github'
 
+// Simple in-memory rate limiter
+const rateLimitMap = new Map<string, { count: number; lastReset: number }>()
+const RATE_LIMIT_WINDOW_MS = 60000 // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 10 // max 10 messages per minute per IP
+
 export async function POST(req: Request) {
   try {
+    // 1. IP-based Rate Limiting
+    const ip = req.headers.get('x-forwarded-for') || 'unknown-ip'
+    const now = Date.now()
+    const rateLimitInfo = rateLimitMap.get(ip)
+
+    if (rateLimitInfo) {
+      if (now - rateLimitInfo.lastReset < RATE_LIMIT_WINDOW_MS) {
+        if (rateLimitInfo.count >= MAX_REQUESTS_PER_WINDOW) {
+          return NextResponse.json(
+            { error: 'Too many requests. Please wait a minute before sending another message.' },
+            { status: 429 }
+          )
+        }
+        rateLimitInfo.count++
+      } else {
+        // Reset window
+        rateLimitMap.set(ip, { count: 1, lastReset: now })
+      }
+    } else {
+      rateLimitMap.set(ip, { count: 1, lastReset: now })
+    }
+
     const body = await req.json()
     const { message, sessionId } = body
 

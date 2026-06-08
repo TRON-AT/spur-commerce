@@ -92,7 +92,7 @@ export function useChat() {
         const errorMsg: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: `⚠️ Oops! ${error.message || 'Something went wrong.'}`,
+          content: `⚠️ We encountered an issue: ${error.message || 'Please try again later.'}`,
           timestamp: new Date(),
         }
         setMessages((prev) => [...prev, errorMsg])
