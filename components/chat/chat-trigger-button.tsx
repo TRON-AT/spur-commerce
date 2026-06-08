@@ -12,7 +12,7 @@ export function ChatTriggerButton({ isOpen, onToggle }: ChatTriggerButtonProps) 
   return (
     <button
       onClick={onToggle}
-      className={`fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 flex items-center justify-center group font-semibold ${
+      className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 h-14 w-14 sm:h-16 sm:w-16 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 flex items-center justify-center group font-semibold ${
         isOpen
           ? 'bg-foreground/80 text-background'
           : 'bg-gradient-to-br from-accent to-primary text-accent-foreground hover:shadow-lg hover:shadow-accent/40'

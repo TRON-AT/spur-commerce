@@ -1,8 +1,8 @@
 # SpurCommerce AI Chat Widget
 
-This repository contains the frontend and backend implementation of an AI-powered customer support chat widget for **SpurCommerce**, built as a take-home assignment.
+This repository contains the frontend and backend implementation of an AI-powered customer support chat widget for **SpurCommerce**.
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 
 ### 1. Install Dependencies
 Make sure you have Node.js and `pnpm` installed.
@@ -23,8 +23,6 @@ We use **Prisma** with **SQLite** for a frictionless zero-config local database 
 # Push the schema to create the local database
 pnpm exec prisma db push
 
-# (Optional) Open Prisma Studio to view the DB
-pnpm exec prisma studio
 ```
 
 ### 4. Start the Development Server
@@ -35,7 +33,7 @@ Navigate to `http://localhost:3000` to interact with the store and the chat widg
 
 ---
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 The application is structured to ensure a clean **separation of concerns**:
 
@@ -51,7 +49,7 @@ The application is structured to ensure a clean **separation of concerns**:
 
 ---
 
-## 🤖 LLM Notes
+##  LLM Notes
 
 *   **Provider**: We are using **GitHub Models** via the standard OpenAI SDK (pointing to `models.inference.ai.azure.com`).
 *   **Model**: `gpt-4o`.
@@ -59,7 +57,7 @@ The application is structured to ensure a clean **separation of concerns**:
 
 ---
 
-## ⚖️ Trade-offs & "If I had more time..."
+##  Trade-offs & "If I had more time..."
 
 *   **Vector Database (RAG)**: Currently, the store's knowledge base is hardcoded into the system prompt. If I had more time, I would implement Retrieval-Augmented Generation (RAG) using a vector database to dynamically inject context based on the user's query.
 *   **Streaming Responses**: The backend currently waits for the full LLM response before replying. In a real product, I would use the Next.js AI SDK to stream the text to the UI for better perceived performance.

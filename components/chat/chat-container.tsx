@@ -21,9 +21,9 @@ export function ChatContainer({
   onResetChat,
 }: ChatContainerProps) {
   return (
-    <div className="fixed bottom-[100px] right-6 w-[420px] h-[560px] flex flex-col bg-card border border-border/40 rounded-2xl shadow-2xl shadow-accent/20 overflow-hidden z-40 backdrop-blur-sm">
+    <div className="fixed inset-0 sm:inset-auto sm:bottom-[100px] sm:right-6 w-full sm:w-[420px] h-[100dvh] sm:h-[560px] flex flex-col bg-card sm:border sm:border-border/40 rounded-none sm:rounded-2xl shadow-none sm:shadow-2xl sm:shadow-accent/20 overflow-hidden z-[100] backdrop-blur-sm">
       {/* Header */}
-      <div className="border-b border-border/30 bg-gradient-to-r from-primary to-accent px-6 py-4 text-accent-foreground">
+      <div className="border-b border-border/30 bg-gradient-to-r from-primary to-accent px-4 sm:px-6 py-4 text-accent-foreground flex-shrink-0">
         <h3 className="font-bold text-sm tracking-wide">SPUR SUPPORT</h3>
         <div className="flex items-center justify-between mt-1">
           <div className="flex items-center gap-2">

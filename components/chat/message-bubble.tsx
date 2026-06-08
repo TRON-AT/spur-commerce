@@ -18,7 +18,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
       )}
 
       <div
-        className={`max-w-xs rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm transition-all ${
+        className={`max-w-[85%] sm:max-w-xs rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm transition-all ${
           isUser
             ? 'bg-gradient-to-br from-accent to-primary text-accent-foreground'
             : 'bg-muted/70 text-foreground border border-border/30'

@@ -33,14 +33,14 @@ export function ChatInput({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-t border-border/30 bg-background/80 backdrop-blur-sm p-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-t border-border/30 bg-background/80 backdrop-blur-sm p-3 sm:p-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] flex-shrink-0">
       <textarea
         value={input}
         onChange={(e) => onInputChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Ask about shipping, sizes, materials..."
-        className="resize-none rounded-xl border border-border/50 bg-card px-4 py-3 text-sm outline-none placeholder:text-foreground/40 focus:ring-2 focus:ring-accent focus:ring-offset-1 focus:ring-offset-background transition-all"
-        rows={3}
+        className="resize-none rounded-xl border border-border/50 bg-card px-3 py-2 sm:px-4 sm:py-3 text-sm outline-none placeholder:text-foreground/40 focus:ring-2 focus:ring-accent focus:ring-offset-1 focus:ring-offset-background transition-all"
+        rows={2}
         disabled={isLoading}
       />
       <div className="flex justify-end">
